@@ -105,12 +105,16 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-        it('is greater than one after loadFeed', function(done){
-            loadFeed(1, function(err){
+        beforeEach(function(done){
+          loadFeed(1, function(err){
                 expect(err).toBeNull();
-                expect($('.feed').children().length).toBeGreaterThan(0);
                 done();
             });
+        });
+
+        it('is greater than one after loadFeed', function(done){
+            expect($('.feed').children().length).toBeGreaterThan(0);
+            done();
         });
     });
 
