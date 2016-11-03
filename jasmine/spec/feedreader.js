@@ -52,17 +52,14 @@ $(function() {
 
     /* A test suite named "The menu" */
     describe('The Menu', function(){
-
         /* A test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
         it('starts hidden', function(){
-          var menuHidden = $('body').hasClass('menu-hidden');
-          var onScreen = $('.slide-menu').position().left + $('.slide-menu').width();
-          expect(menuHidden).toBe(true);
-          expect(onScreen).toBeLessThan(0);
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+            expect($('.slide-menu').position().left + $('.slide-menu').width()).toBeLessThan(0);
         });
 
          /* A test that ensures the menu changes
@@ -70,7 +67,29 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-        it('changes visibility when clicked');
+        it('slides out when button is clicked', function(){
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            expect($('.slide-menu').position().left).toBe(0);
+        });
+        it('slides in when button is clicked again', function(){
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+            expect($('.slide-menu').position().left + $('.slide-menu').width()).toBeLessThan(0);
+        });
+
+        /* Trigger clicks and wait for the transitions to complete between specs before testing the expectations.
+        */
+        afterEach(function(done){
+            $('.icon-list').trigger('click');
+            $('.slide-menu').on( 'transitionend', function() {
+                $('.slide-menu').off( 'transitionend');
+                done();
+            });
+        });
+
+        afterAll(function(){
+          $('body').addClass('menu-hidden');
+        });
+
     });
 
     /* A test suite named "Initial Entries" */
