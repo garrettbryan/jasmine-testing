@@ -92,6 +92,8 @@ $(function() {
 
     });
 
+
+
     /* A test suite named "Initial Entries" */
     describe('Initial Entries', function(){
         /* A test that ensures when the loadFeed
@@ -100,16 +102,49 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
-         it('is greater than one after loadFeed');
+        it('is greater than one after loadFeed', function(done){
+            loadFeed(1, function(err){
+                expect(err).toBeNull();
+                expect($('.feed').children().length).toBeGreaterThan(0);
+                done();
+            });
+        });
     });
+
+
 
     /* A test suite named "New Feed Selection" */
     describe('New Feed Selection', function(){
+        var newChild, originalChild;
+
         /* A test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-         it('updates the content on the page');
+        it('allFeeds.length must be greater than 1', function(done){
+            expect(allFeeds.length).toBeGreaterThan(1);
+            done();
+        });
+        it('load the first feed', function(done){
+            loadFeed(0, function(err){
+                expect(err).toBeNull();
+                expect($('.feed').children().length).toBeGreaterThan(0);
+                originalChild = $('.feed')[0].innerText;
+                done();
+            });
+        });
+        it('load the second feed', function(done){
+            loadFeed(1, function(err){
+                expect(err).toBeNull();
+                expect($('.feed').children().length).toBeGreaterThan(0);
+                newChild = $('.feed')[0].innerText;
+                done();
+            });
+        });
+
+        it('updates the content on the page', function(){
+            expect(originalChild).not.toEqual(newChild);
+        });
     });
 
 
