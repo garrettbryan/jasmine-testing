@@ -121,12 +121,12 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        it('allFeeds.length must be greater than 1', function(done){
-            expect(allFeeds.length).toBeGreaterThan(1);
+        it('allFeeds.length must be greater than 3', function(done){
+            expect(allFeeds.length).toBeGreaterThan(3);
             done();
         });
         it('load the first feed', function(done){
-            loadFeed(0, function(err){
+            loadFeed(2, function(err){
                 expect(err).toBeNull();
                 expect($('.feed').children().length).toBeGreaterThan(0);
                 originalChild = $('.feed')[0].innerText;
@@ -134,7 +134,7 @@ $(function() {
             });
         });
         it('load the second feed', function(done){
-            loadFeed(1, function(err){
+            loadFeed(3, function(err){
                 expect(err).toBeNull();
                 expect($('.feed').children().length).toBeGreaterThan(0);
                 newChild = $('.feed')[0].innerText;
