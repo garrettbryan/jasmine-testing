@@ -56,6 +56,8 @@ $(function() {
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
+         * Verify that the body has the menu-hidden class on
+         * start and that the element is off the screen
          */
         it('starts hidden', function(){
             expect($('body').hasClass('menu-hidden')).toBe(true);
@@ -86,6 +88,7 @@ $(function() {
             });
         });
 
+        /* Rehide the menu before continuing. */
         afterAll(function(){
           $('body').addClass('menu-hidden');
         });
