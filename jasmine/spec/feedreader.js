@@ -106,6 +106,7 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
         beforeEach(function(done){
+          expect(allFeeds.length).toBeGreaterThan(3);
           loadFeed(1, function(err){
                 expect(err).toBeNull();
                 done();
