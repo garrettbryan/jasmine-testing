@@ -20,6 +20,9 @@ var allFeeds = [
     }, {
         name: 'Linear Digressions',
         url: 'https://feeds.feedburner.com/udacity-linear-digressions'
+    }, {
+        name: 'Test Broken Feed',
+        url: 'https://brokenfeeds.feedburner.com/a-broken-feed'
     }
 ];
 
@@ -74,11 +77,27 @@ function init() {
                  }
                },
        error: function (result, status, err){
-                 //run only the callback without attempting to parse result due to error
-                 if (cb) {
-                     cb(err);
-                 }
-               },
+                //Implementation for handling errors from a feed.
+                var container = $('.feed'),
+                    title = $('.header-title'),
+                    entryTemplate = Handlebars.compile($('.tpl-entry').html());
+
+                title.html(feedName);   // Set the header text
+                container.empty();      // Empty out all previous entries
+
+                var entry = {
+                  link: '#',
+                  title: 'No Articles Available',
+                  contentSnippet: status
+                };
+
+                container.append(entryTemplate(entry));
+
+                //run only the callback without attempting to parse result due to error
+                if (cb) {
+                    cb(err);
+                }
+            },
        dataType: "json"
      });
  }
