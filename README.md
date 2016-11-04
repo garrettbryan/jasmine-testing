@@ -3,6 +3,8 @@
     2. evaluate index.html, app.js, feedreader.js
     3. open index.html in Chrome
 
+###Project also on gh-pages:
+https://garrettbryan.github.io/jasmine-testing/#
 
 ###Modifications to js:
     1. updated the ajax callback in app.js to return an err value.
