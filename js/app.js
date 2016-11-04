@@ -10,7 +10,7 @@
 var allFeeds = [
     {
         name: 'Udacity Blog',
-        url: 'https://blog.udacity.com/feed'
+        url: 'http://blog.udacity.com/feed'
     }, {
         name: 'CSS Tricks',
         url: 'https://feeds.feedburner.com/CssTricks'
@@ -32,7 +32,7 @@ var allFeeds = [
  */
 function init() {
     // Load the first feed we've defined (index of 0).
-    loadFeed(1);
+    loadFeed(0);
 }
 
 /* This function performs everything necessary to load a
